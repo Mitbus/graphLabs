@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="700891b7-8c9f-4f73-a398-4cd3a0510897" name="Default Changelist" comment="" />
+    <list default="true" id="d222b81e-9eb1-4a72-a54a-448939b2a529" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1Y51eJdyOXAQdpXOMdaymui4ul7" />
+  <component name="ProjectId" id="1ZIPyNGVAzEQCtSDsiuBiLvFXvl" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -23,48 +19,25 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../untitled" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.lab2">
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="untitled" />
+  <component name="RunManager">
+    <configuration name="lab2" type="PythonConfigurationType" factoryName="Python">
+      <module name="graphLabs" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\ilya\PycharmProjects\untitled\venv\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="lab2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="untitled" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\ilya\PycharmProjects\untitled\venv\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
+      <option name="SDK_HOME" value="C:\Program Files (x86)\Python38-32\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -78,62 +51,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="untitled" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\ilya\PycharmProjects\untitled\venv\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Python.test" />
-      <item itemvalue="Python.lab2" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.lab2" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="700891b7-8c9f-4f73-a398-4cd3a0510897" name="Default Changelist" comment="" />
-      <created>1582217735660</created>
+      <changelist id="d222b81e-9eb1-4a72-a54a-448939b2a529" name="Default Changelist" comment="" />
+      <created>1584523888191</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1582217735660</updated>
-      <workItem from="1582217739571" duration="5617000" />
-      <workItem from="1582276562192" duration="3426000" />
-      <workItem from="1582281763609" duration="8391000" />
-      <workItem from="1582567583104" duration="210000" />
-      <workItem from="1582609018967" duration="1886000" />
-      <workItem from="1582611061929" duration="894000" />
-      <workItem from="1582619807851" duration="1815000" />
-      <workItem from="1583318801040" duration="17324000" />
-      <workItem from="1583818033635" duration="742000" />
-      <workItem from="1583829234411" duration="165000" />
-      <workItem from="1584182913138" duration="601000" />
-      <workItem from="1584348773881" duration="14090000" />
-      <workItem from="1584522913795" duration="244000" />
-      <workItem from="1584523210898" duration="142000" />
+      <updated>1584523888191</updated>
+      <workItem from="1584523890115" duration="1042000" />
+      <workItem from="1584527121311" duration="242000" />
     </task>
     <servers />
   </component>
@@ -141,54 +71,48 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584523343020">
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584526927202">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1584523343020" />
-    <state x="421" y="95" key="FileChooserDialogImpl" timestamp="1584523351676">
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1584526927202" />
+    <state x="421" y="95" key="FileChooserDialogImpl" timestamp="1584527178548">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1584523351676" />
-    <state width="1237" height="65" key="GridCell.Tab.0.bottom" timestamp="1584369956805">
+    <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1584527178548" />
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1584527366326">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="65" key="GridCell.Tab.0.bottom/0.0.1280.680/-1600.-87.1538.900@0.0.1280.680" timestamp="1584363397063" />
-    <state width="1237" height="65" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584369956805" />
-    <state width="1237" height="65" key="GridCell.Tab.0.center" timestamp="1584369956805">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584527366326" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1584527366323">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="65" key="GridCell.Tab.0.center/0.0.1280.680/-1600.-87.1538.900@0.0.1280.680" timestamp="1584363397063" />
-    <state width="1237" height="65" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584369956805" />
-    <state width="1237" height="65" key="GridCell.Tab.0.left" timestamp="1584369956805">
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584527366323" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1584527366323">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="65" key="GridCell.Tab.0.left/0.0.1280.680/-1600.-87.1538.900@0.0.1280.680" timestamp="1584363397063" />
-    <state width="1237" height="65" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584369956805" />
-    <state width="1237" height="65" key="GridCell.Tab.0.right" timestamp="1584369956805">
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584527366323" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1584527366323">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="65" key="GridCell.Tab.0.right/0.0.1280.680/-1600.-87.1538.900@0.0.1280.680" timestamp="1584363397063" />
-    <state width="1237" height="65" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584369956805" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1582296201432">
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584527366323" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1584527362556">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1582296201432" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1582277518608">
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1584527362556" />
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1584527120336">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1280.680@0.0.1280.680" timestamp="1582277518608" />
-    <state x="336" y="164" key="com.intellij.ide.util.TipDialog" timestamp="1584522918333">
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584527120336" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1584527249698">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="336" y="164" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584522918333" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1583431693023">
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1584527249698" />
+    <state x="471" y="132" key="svn.repositoryBrowser" timestamp="1584527188668">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1583431693023" />
+    <state x="471" y="132" key="svn.repositoryBrowser/0.0.1280.680@0.0.1280.680" timestamp="1584527188668" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/untitled$lab2.coverage" NAME="lab2 Coverage Results" MODIFIED="1584522935877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
-    <SUITE FILE_PATH="coverage/untitled$test.coverage" NAME="test Coverage Results" MODIFIED="1582620137463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
-    <SUITE FILE_PATH="coverage/untitled$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1582621613730" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv" />
+    <SUITE FILE_PATH="coverage/graphLabs$lab2.coverage" NAME="lab2 Coverage Results" MODIFIED="1584527366291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
   </component>
 </project>
