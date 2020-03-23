@@ -59,11 +59,12 @@ def moveevent(window, key, scancode, action, mods):
         oxtr -= 0.01
 
 
+size_x, size_y = 450, 450
 
 def main():
     if not glfw.init():
         return
-    window = glfw.create_window(900, 900, "lab", None, None)
+    window = glfw.create_window(2 * size_x, 2 * size_y, "lab", None, None)
     if not window:
         glfw.terminate()
         return
@@ -116,35 +117,35 @@ def main():
                        0, 0, -0.5, 1])
         glBegin(GL_QUADS if colormode else GL_LINES)
         glColor3f(1, 0, 0)
-        glVertex3f(-0.5, -0.5, 0)
-        glVertex3f(0.5, -0.5, 0)
-        glVertex3f(0.5, 0.5, 0)
-        glVertex3f(-0.5, 0.5, 0)
+        glVertex3f(-0.5, -0.5, -0.5)
+        glVertex3f(0.5, -0.5, -0.5)
+        glVertex3f(0.5, 0.5, -0.5)
+        glVertex3f(-0.5, 0.5, -0.5)
         glColor3f(0, 1, 0)
-        glVertex3f(-0.5, -0.5, 1)
-        glVertex3f(0.5, -0.5, 1)
-        glVertex3f(0.5, 0.5, 1)
-        glVertex3f(-0.5, 0.5, 1)
+        glVertex3f(-0.5, -0.5, 0.5)
+        glVertex3f(0.5, -0.5, 0.5)
+        glVertex3f(0.5, 0.5, 0.5)
+        glVertex3f(-0.5, 0.5, 0.5)
         glColor3f(0, 0, 1)
-        glVertex3f(-0.5, -0.5, 0)
-        glVertex3f(-0.5, 0.5, 0)
-        glVertex3f(-0.5, 0.5, 1)
-        glVertex3f(-0.5, -0.5, 1)
+        glVertex3f(-0.5, -0.5, -0.5)
+        glVertex3f(-0.5, 0.5, -0.5)
+        glVertex3f(-0.5, 0.5, 0.5)
+        glVertex3f(-0.5, -0.5, 0.5)
         glColor3f(0, 0.5, 0.5)
-        glVertex3f(0.5, -0.5, 0)
-        glVertex3f(0.5, 0.5, 0)
-        glVertex3f(0.5, 0.5, 1)
-        glVertex3f(0.5, -0.5, 1)
+        glVertex3f(0.5, -0.5, -0.5)
+        glVertex3f(0.5, 0.5, -0.5)
+        glVertex3f(0.5, 0.5, 0.5)
+        glVertex3f(0.5, -0.5, 0.5)
         glColor3f(0.5, 0.2, 0.7)
-        glVertex3f(0.5, -0.5, 0)
-        glVertex3f(0.5, -0.5, 1)
-        glVertex3f(-0.5, -0.5, 1)
-        glVertex3f(-0.5, -0.5, 0)
+        glVertex3f(0.5, -0.5, -0.5)
+        glVertex3f(0.5, -0.5, 0.5)
+        glVertex3f(-0.5, -0.5, 0.5)
+        glVertex3f(-0.5, -0.5, -0.5)
         glColor3f(0.5, 0.5, 0)
-        glVertex3f(0.5, 0.5, 0)
-        glVertex3f(0.5, 0.5, 1)
-        glVertex3f(-0.5, 0.5, 1)
-        glVertex3f(-0.5, 0.5, 0)
+        glVertex3f(0.5, 0.5, -0.5)
+        glVertex3f(0.5, 0.5, 0.5)
+        glVertex3f(-0.5, 0.5, 0.5)
+        glVertex3f(-0.5, 0.5, -0.5)
         glEnd()
 
     def minibox():
@@ -170,27 +171,31 @@ def main():
 
     def ortograph():
         # front view
+        glViewport(0, size_y, size_x, size_y)
         glLoadIdentity()
         glMultMatrixd([1, 0, 0, 0,
                        0, 1, 0, 0,
                        0, 0, -1, 0,
-                       -0.5, 0.5, 0, 1])
+                       0, 0, 0, 1])
         mainbox()
         # top view
+        glViewport(0, 0, size_x, size_y)
         glLoadIdentity()
         glMultMatrixd([1, 0, 0, 0,
                        0, 0, -1, 0,
                        0, -1, 0, 0,
-                       -0.5, 0, 0, 1])
+                       0, 0, 0, 1])
         mainbox()
         # side view
+        glViewport(size_x, size_y, size_x, size_y)
         glLoadIdentity()
         glMultMatrixd([0, 0, -1, 0,
                        0, 1, 0, 0,
                        -1, 0, 0, 0,
-                       1, 0.5, 0, 1])
+                       0, 0, 0, 1])
         mainbox()
         # main view
+        glViewport(size_x, 0, size_x, size_y)
         glLoadIdentity()
         glMultMatrixd([0.87, 0, 1, 0.5,  # double point perspective
                        0, 1, 0, 0,
@@ -199,7 +204,7 @@ def main():
         glMultMatrixd([1, 0, 0, 0,
                        0, 1, 0, 0,
                        0, 0, 1, 0,
-                       xpos + 0.5, ypos - 0.5, zpos, 1])
+                       xpos, ypos, zpos, 1])
         mainbox()
 
 
