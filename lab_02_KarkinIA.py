@@ -9,6 +9,7 @@ oxtr = oytr = oztr = 0
 xscale = yscale = zscale = scale = 1
 colormode = True
 
+
 def moveevent(window, key, scancode, action, mods):
     global xpos, ypos, zpos
     global oztr, oytr, oxtr
@@ -60,6 +61,7 @@ def moveevent(window, key, scancode, action, mods):
 
 
 size_x, size_y = 450, 450
+
 
 def main():
     if not glfw.init():
@@ -207,8 +209,6 @@ def main():
                        xpos, ypos, zpos, 1])
         mainbox()
 
-
-
     while not glfw.window_should_close(window):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         ortograph()
@@ -217,10 +217,9 @@ def main():
         glfw.poll_events()
         time.sleep(0.01)
 
-
-
     glfw.destroy_window(window)
     glfw.terminate()
+
 
 if __name__ == "__main__":
     main()
