@@ -8,22 +8,21 @@ import numpy as np
 dt = 0
 xpos = ypos = zpos = 0
 oxtr = oytr = oztr = 0
-xscale = yscale = zscale = scale = 1
-colormode = True
-vertex_height_count = 1  # промежуточные вершины + 1
-vertex_lenght_count = 3  # общее кол-во вершин
-vertex_into_count = 1  # кол-во внутренних эллипсов
+xscale = yscale = zscale = 1
+scale = 0.1
+colormode = False
+vertex_height_count = 1  # кол-во эллипсов в единицу t
+vertex_lenght_count = 3  # общее кол-во вершин(3)
+t_param = 3  # высота спирали
 changes = True
 figure = None
-ellipse_param = 2
 
 
 def moveevent(window, key, scancode, action, mods):
     global xpos, ypos, zpos
     global oztr, oytr, oxtr
     global scale, colormode, xscale, yscale, zscale
-    global vertex_height_count, vertex_lenght_count, vertex_into_count, changes
-    global ellipse_param
+    global vertex_height_count, vertex_lenght_count, t_param, changes
     if chr(key) == 'U':
         xscale += dt
     if chr(key) == 'J':
@@ -38,9 +37,9 @@ def moveevent(window, key, scancode, action, mods):
         zscale -= dt
 
     if chr(key) == 'Z':
-        scale += dt
+        scale += dt / 10
     if chr(key) == 'X':
-        scale -= dt
+        scale -= dt / 10
     if chr(key) == 'C' and action == 1:
         colormode = not colormode
 
@@ -83,19 +82,15 @@ def moveevent(window, key, scancode, action, mods):
         vertex_lenght_count -= 1
         changes = True
     if chr(key) == '5':
-        vertex_into_count += 1
+        t_param += 1
         changes = True
-    if chr(key) == '6' and vertex_into_count > 1:
-        vertex_into_count -= 1
+    if chr(key) == '6' and t_param > 1:
+        t_param -= 1
         changes = True
-    if chr(key) == 'V':
-        ellipse_param += dt
-    if chr(key) == 'B':
-        ellipse_param -= dt
 
 
 
-size_x, size_y = 450, 450
+size_x, size_y = 500, 500
 
 
 def main():
@@ -133,94 +128,63 @@ def main():
     glPushMatrix()
 
     def calc():
-        triangles_poly = []
-        triangles_color = []
+        ellipse_param = 2
+        radius = 5  # радиус спирали
+
+        def dx_dt(t):
+            return -radius * math.sin(t)
+
+        def dy_dt(t):
+            return radius * math.cos(t)
+
+        def x(t):
+            return radius * math.cos(t)
+
+        def y(t):
+            return radius * math.sin(t)
+
+        def z(t):
+            return t
+
+        def int_r(num):
+            num = int(num + (0.5 if num > 0 else -0.5))
+            return num
+
         quads_poly = []
-        quads_color = []
-        lines = []
-        lines_color = []
-        angle = 0
-        is_red = True
-        while angle < 360:
-            next_angle = angle + 360 / vertex_lenght_count
-            if next_angle > 360:
-                next_angle = 360
-            cur_x = math.cos(math.radians(angle)) / vertex_into_count
-            cur_y = math.sin(math.radians(angle)) / vertex_into_count
-            next_x = math.cos(math.radians(next_angle)) / vertex_into_count
-            next_y = math.sin(math.radians(next_angle)) / vertex_into_count
-            triangles_color.append((1 if is_red else 0, 0 if is_red else 1, 0))
-            triangles_color.append((1 if is_red else 0, 0 if is_red else 1, 0))
-            triangles_color.append((0.5, 0.5, 0))
-            triangles_color.append((1 if is_red else 0, 0 if is_red else 1, 0))
-            triangles_color.append((1 if is_red else 0, 0 if is_red else 1, 0))
-            triangles_color.append((0.5, 0.5, 0))
-            is_red = not is_red
-            triangles_poly.append((cur_x, cur_y, 1))
-            triangles_poly.append((0, 0, 1))
-            triangles_poly.append((next_x, next_y, 1))
-            triangles_poly.append((cur_x, cur_y, -1))
-            triangles_poly.append((0, 0, -1))
-            triangles_poly.append((next_x, next_y, -1))
-            lines.append((0, 0, 1))
-            lines.append((cur_x * vertex_into_count, cur_y * vertex_into_count, 1))
-            lines.append((cur_x, cur_y, 1))
-            lines.append((next_x, next_y, 1))
-            lines.append((0, 0, -1))
-            lines.append((cur_x * vertex_into_count, cur_y * vertex_into_count, -1))
-            lines.append((cur_x, cur_y, -1))
-            lines.append((next_x, next_y, -1))
-            for j in range(8):
-                lines_color.append((0, 0, 1))
-            i = 1
-            while i < vertex_into_count:
-                quads_color.append((1 if is_red else 0, 0 if is_red else 1, 0))
-                quads_color.append((1 if is_red else 0, 0 if is_red else 1, 0))
-                quads_color.append((0.5, 0.5, 0))
-                quads_color.append((0.5, 0.5, 0))
-                quads_color.append((1 if is_red else 0, 0 if is_red else 1, 0))
-                quads_color.append((1 if is_red else 0, 0 if is_red else 1, 0))
-                quads_color.append((0.5, 0.5, 0))
-                quads_color.append((0.5, 0.5, 0))
-                is_red = not is_red
-                quads_poly.append((cur_x * i, cur_y * i, 1))
-                quads_poly.append((cur_x * (i + 1), cur_y * (i + 1), 1))
-                quads_poly.append((next_x * (i + 1), next_y * (i + 1), 1))
-                quads_poly.append((next_x * i, next_y * i, 1))
-                quads_poly.append((cur_x * i, cur_y * i, -1))
-                quads_poly.append((cur_x * (i + 1), cur_y * (i + 1), -1))
-                quads_poly.append((next_x * (i + 1), next_y * (i + 1), -1))
-                quads_poly.append((next_x * i, next_y * i, -1))
-                lines.append((cur_x * (i + 1), cur_y * (i + 1), 1))
-                lines.append((next_x * (i + 1), next_y * (i + 1), 1))
-                lines.append((cur_x * (i + 1), cur_y * (i + 1), -1))
-                lines.append((next_x * (i + 1), next_y * (i + 1), -1))
-                for j in range(4):
-                    lines_color.append((0, 0, 1))
-                i += 1
-            delta_height = 2 / vertex_height_count
-            i = 0
-            lines.append((cur_x * vertex_into_count, cur_y * vertex_into_count, 1))
-            lines.append((cur_x * vertex_into_count, cur_y * vertex_into_count, -1))
-            lines_color.append((0, 0, 1))
-            lines_color.append((0, 0, 1))
-            while i < vertex_height_count:
-                lines_color.append((0, 0, 1))
-                lines_color.append((0, 0, 1))
-                lines.append((cur_x * vertex_into_count, cur_y * vertex_into_count, 1 - delta_height * (i + 1)))
-                lines.append((next_x * vertex_into_count, next_y * vertex_into_count, 1 - delta_height * (i + 1)))
-                quads_poly.append((cur_x * vertex_into_count, cur_y * vertex_into_count, 1 - delta_height * i))
-                quads_poly.append((cur_x * vertex_into_count, cur_y * vertex_into_count, 1 - delta_height * (i + 1)))
-                quads_poly.append((next_x * vertex_into_count, next_y * vertex_into_count, 1 - delta_height * (i + 1)))
-                quads_poly.append((next_x * vertex_into_count, next_y * vertex_into_count, 1 - delta_height * i))
-                quads_color.append((1 if is_red else 0, 0 if is_red else 1, 0))
-                quads_color.append((1 if is_red else 0, 0 if is_red else 1, 0))
-                quads_color.append((0.5, 0.5, 0))
-                quads_color.append((0.5, 0.5, 0))
-                is_red = not is_red
-                i += 1
-            angle = next_angle
-        return triangles_poly, quads_poly, lines, triangles_color, quads_color, lines_color
+        ellipse = []
+        for i in range(vertex_lenght_count):
+            ellipse.append(np.array([math.cos(2 * math.pi * i / vertex_lenght_count) * ellipse_param,
+                            math.sin(2 * math.pi * i / vertex_lenght_count), 0]))
+        t = 0
+        delta_t_param = 1 / vertex_height_count
+        align = 0  # параметр выравнивания t по целым числам
+        while t <= t_param:
+            align += 1
+            pos = np.array([x(t), y(t), z(t)])
+            new_z = np.array([dx_dt(t), dy_dt(t), 1])
+            new_x = np.array([x(t), y(t), -(x(t) * new_z[0] + y(t) * new_z[1])])
+            new_y = np.array([new_x[1] * new_z[2] - new_x[2] * new_z[1], new_x[2] * new_z[0] - new_x[0] * new_z[2],
+                     new_x[0] * new_z[1] - new_x[1] * new_z[0]])
+            new_z /= np.linalg.norm(new_z)
+            new_y /= np.linalg.norm(new_y)
+            new_x /= np.linalg.norm(new_x)
+            trans_matrix = np.array([[new_x[0], new_y[0], new_z[0]],
+                                     [new_x[1], new_y[1], new_z[1]],
+                                     [new_x[2], new_y[2], new_z[2]]])
+            if t > 0:
+                for i in range(vertex_lenght_count):
+                    quads_poly.append(quads_poly[len(quads_poly) - 2 * vertex_lenght_count])
+                    quads_poly.append(list(trans_matrix.dot(ellipse[i]) + pos))
+            for i in range(vertex_lenght_count - 1):
+                quads_poly.append(list(trans_matrix.dot(ellipse[i]) + pos))
+                quads_poly.append(list(trans_matrix.dot(ellipse[i + 1]) + pos))
+            quads_poly.append(list(trans_matrix.dot(ellipse[vertex_lenght_count - 1]) + pos))
+            quads_poly.append(list(trans_matrix.dot(ellipse[0]) + pos))
+            t += delta_t_param
+            if align == vertex_height_count:
+                align = 0
+                t = int_r(t)
+        return quads_poly
 
     def mainbox():
         global changes
@@ -241,7 +205,7 @@ def main():
                        0, math.cos(oxtr), -math.sin(oxtr), 0,
                        0, math.sin(oxtr), math.cos(oxtr), 0,
                        0, 0, 0, 1])
-        glMultMatrixd([1 * ellipse_param, 0, 0, 0,  # move to center + ellipse param
+        glMultMatrixd([1, 0, 0, 0,  # move to center
                        0, 1, 0, 0,
                        0, 0, 1, 0,
                        0, 0, -0.5, 1])
@@ -249,18 +213,10 @@ def main():
             changes = False
             figure = calc()
         glEnableClientState(GL_VERTEX_ARRAY)
-        glEnableClientState(GL_COLOR_ARRAY)
-        if colormode:
-            glVertexPointer(3, GL_FLOAT, 0, figure[0])
-            glColorPointer(3, GL_FLOAT, 0, figure[3])
-            glDrawArrays(GL_TRIANGLES, 0, len(figure[0]))
-            glVertexPointer(3, GL_FLOAT, 0, figure[1])
-            glColorPointer(3, GL_FLOAT, 0, figure[4])
-            glDrawArrays(GL_QUADS, 0, len(figure[1]))
-        else:
-            glVertexPointer(3, GL_FLOAT, 0, figure[2])
-            glColorPointer(3, GL_FLOAT, 0, figure[5])
-            glDrawArrays(GL_LINES, 0, len(figure[2]))
+        glColor(0, 1, 0)
+        if not colormode:
+            glVertexPointer(3, GL_FLOAT, 0, figure)
+            glDrawArrays(GL_LINES, 0, len(figure))
 
 
 
@@ -333,9 +289,10 @@ def main():
         glfw.poll_events()
         new_time = time.time()
         dt = new_time - cur_time
-        print(1 / dt)
+        # print(1 / dt)
         cur_time = new_time
-        time.sleep(0.01 if dt < 0.005 else 0)
+        if dt < 0.005:
+            time.sleep(0.01)
 
     glfw.destroy_window(window)
     glfw.terminate()
