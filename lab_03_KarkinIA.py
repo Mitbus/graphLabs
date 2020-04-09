@@ -172,9 +172,14 @@ def main():
                                      [new_x[1], new_y[1], new_z[1]],
                                      [new_x[2], new_y[2], new_z[2]]])
             if t > 0:
+                trang_lines = []
                 for i in range(vertex_lenght_count):
+                    trang_lines.append(quads_poly[len(quads_poly) - 2 * vertex_lenght_count + 1])
+                    trang_lines.append(list(trans_matrix.dot(ellipse[i]) + pos))
                     quads_poly.append(quads_poly[len(quads_poly) - 2 * vertex_lenght_count])
                     quads_poly.append(list(trans_matrix.dot(ellipse[i]) + pos))
+                for i in trang_lines:
+                    quads_poly.append(i)
             for i in range(vertex_lenght_count - 1):
                 quads_poly.append(list(trans_matrix.dot(ellipse[i]) + pos))
                 quads_poly.append(list(trans_matrix.dot(ellipse[i + 1]) + pos))
