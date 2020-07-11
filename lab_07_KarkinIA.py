@@ -17,11 +17,10 @@ xscale = yscale = zscale = 1
 world_xpos = world_ypos = world_zpos = 0
 world_oxtr = world_oytr = world_oztr = 0
 world_change = False
-scale = 0.1
+scale = 0.05
 texmode = False
-# testing on (4, 8) (8, 16) (12, 24) (16, 32) (24, 48) (32, 64)
-vertex_height_count = 4  # кол-во эллипсов в единицу t 8
-vertex_lenght_count = 8  # общее кол-во вершин(3) 16
+vertex_height_count = 8  # кол-во эллипсов в единицу t 8
+vertex_lenght_count = 16  # общее кол-во вершин(3) 16
 t_param = 20  # высота спирали 8
 ellipse_param = 2
 radius = 5  # радиус спирали
@@ -43,6 +42,13 @@ tex = None
 tex_coord = None
 t_sum = 0
 t_count = 0
+
+
+def create_shader(type, src):
+    shader = glCreateShader(type)
+    glShaderSource(shader, src)
+    glCompileShader(shader)
+    return shader
 
 
 def calc_trang_normal(p1, p2, p3):
@@ -142,47 +148,24 @@ def calc():
             for i in range(vertex_lenght_count):
                 cur_p = list(trans_matrix.dot(ellipse[i]) + pos)
                 next_p = list(trans_matrix.dot(ellipse[i + 1]) + pos)
-                # 2 optimize
                 if i == 0:
                     if is_first_point:
                         is_first_point = False
                         last_el = round3(v3minus(cur_p, cur_pos), 3), (t / t_param, 0)
-                        # normals.append(round3(v3minus(tmp[i], last_center), 3))
-                        # tex_coord.append((prev_t / t_param, 0))
-                    # # 2 optimize
-                    # quads_poly.append(tmp[i])
-                    # quads_poly.append(cur_p)
-                    # normals.append(round3(v3minus(tmp[i], last_center), 3))
-                    # normals.append(round3(v3minus(cur_p, cur_pos), 3))
-                    # tex_coord.append((prev_t / t_param, 0))
-                    # tex_coord.append((t / t_param, 0))
-                # # 2 optimize
-                # quads_poly.append(tmp[i + 1])
-                # quads_poly.append(next_p)
-                # normals.append(round3(v3minus(tmp[i + 1], last_center), 3))
-                # normals.append(round3(v3minus(next_p, cur_pos), 3))
-                # tex_coord.append((prev_t / t_param, (i + 1) / vertex_lenght_count))
-                # tex_coord.append((t / t_param, (i + 1) / vertex_lenght_count))
-
-                # default
-                quads_poly.append(tmp[i])
-                quads_poly.append(cur_p)
+                    # 2 optimize
+                    quads_poly.append(tmp[i])
+                    quads_poly.append(cur_p)
+                    normals.append(round3(v3minus(tmp[i], last_center), 3))
+                    normals.append(round3(v3minus(cur_p, cur_pos), 3))
+                    tex_coord.append((prev_t / t_param, 0))
+                    tex_coord.append((t / t_param, 0))
+                # 2 optimize
                 quads_poly.append(tmp[i + 1])
-                quads_poly.append(cur_p)
                 quads_poly.append(next_p)
-                quads_poly.append(tmp[i + 1])
-                normals.append(round3(v3minus(tmp[i], last_center), 3))
-                tex_coord.append((prev_t / t_param, 0))
-                normals.append(round3(v3minus(cur_p, cur_pos), 3))
-                tex_coord.append((t / t_param, 0))
                 normals.append(round3(v3minus(tmp[i + 1], last_center), 3))
-                tex_coord.append((prev_t / t_param, (i + 1) / vertex_lenght_count))
-                normals.append(round3(v3minus(cur_p, cur_pos), 3))
-                tex_coord.append((t / t_param, 0))
                 normals.append(round3(v3minus(next_p, cur_pos), 3))
-                tex_coord.append((t / t_param, (i + 1) / vertex_lenght_count))
-                normals.append(round3(v3minus(tmp[i + 1], last_center), 3))
                 tex_coord.append((prev_t / t_param, (i + 1) / vertex_lenght_count))
+                tex_coord.append((t / t_param, (i + 1) / vertex_lenght_count))
 
 
         tmp = []
@@ -199,13 +182,13 @@ def calc():
     tex_coord.append(last_el[1])
 
     # default
-    normals.pop(0)
-    tex_coord.pop(0)
+    # normals.pop(0)
+    # tex_coord.pop(0)
 
     # 1st optimize
-    # quads_poly = [el for lst in quads_poly for el in lst]
-    # normals = [el for lst in normals for el in lst]
-    # tex_coord = [el for lst in tex_coord for el in lst]
+    quads_poly = [el for lst in quads_poly for el in lst]
+    normals = [el for lst in normals for el in lst]
+    tex_coord = [el for lst in tex_coord for el in lst]
 
     return quads_poly, normals, collider, tex_coord
 
@@ -241,7 +224,8 @@ def mainbox():
         changes = False
         figure, normals, collider, tex_coord = calc()
 
-        # 1st optimize
+
+        # 1st optimize + 4 optimize delete tex_coord
         glEnableClientState(GL_VERTEX_ARRAY)
         glEnableClientState(GL_TEXTURE_COORD_ARRAY)
         glEnableClientState(GL_NORMAL_ARRAY)
@@ -256,17 +240,22 @@ def mainbox():
         glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE)
 
     # 1st optimize
-    # glDrawArrays(GL_TRIANGLE_STRIP, 0, int(len(figure) / 3))
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, int(len(figure) / 3))
 
     # 2 optimize
     # glBegin(GL_TRIANGLE_STRIP)
+
     # default
-    glBegin(GL_TRIANGLES)
-    for n in range(len(figure)):
-        glVertex3f(figure[n][0], figure[n][1], figure[n][2])
-        glNormal(normals[n][0], normals[n][1], normals[n][2])
-        glTexCoord2f(tex_coord[n][0], tex_coord[n][1])
-    glEnd()
+    # glBegin(GL_TRIANGLES)
+    # for n in range(len(figure)):
+    #     glVertex3f(figure[n][0], figure[n][1], figure[n][2])
+    #     glNormal(normals[n][0], normals[n][1], normals[n][2])
+    #     # for 4 optimize delete it
+    #     glTexCoord2f(tex_coord[n][0], tex_coord[n][1])
+    # glEnd()
+
+    # 3 optimize
+    # glCallList(1)
 
     if texmode:
         glDisable(GL_TEXTURE_2D)
@@ -311,14 +300,19 @@ def ortograph():
                    0, math.cos(oxtr), -math.sin(oxtr), 0,
                    0, math.sin(oxtr), math.cos(oxtr), 0,
                    0, 0, 0, 1])
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, dif_c0)
-    glLightfv(GL_LIGHT0, GL_AMBIENT, amb_c0)
-    glLightfv(GL_LIGHT0, GL_POSITION, pos0)
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, dif_c1)
-    glLightfv(GL_LIGHT1, GL_POSITION, pos1)
-    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, dir1)
-    glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, cutoff)
-    glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, exp)
+    # 3 optimize + fix
+    if t_count == 0:
+        glNewList(3, GL_COMPILE)
+        glLightfv(GL_LIGHT0, GL_DIFFUSE, dif_c0)
+        glLightfv(GL_LIGHT0, GL_AMBIENT, amb_c0)
+        glLightfv(GL_LIGHT0, GL_POSITION, pos0)
+        glLightfv(GL_LIGHT1, GL_DIFFUSE, dif_c1)
+        glLightfv(GL_LIGHT1, GL_POSITION, pos1)
+        glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, dir1)
+        glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, cutoff)
+        glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, exp)
+        glEndList()
+    glCallList(3)
     draw_box()
     mainbox()
 
@@ -497,6 +491,11 @@ def movement():
 
 
 def draw_box():
+    # 3 optimize
+    if t_count != 0:
+        glCallList(2)
+        return
+    glNewList(2, GL_COMPILE_AND_EXECUTE)
     glBegin(GL_QUADS)
     glColor(0.5,0,0)
     glVertex3f(box[0][0], box[1][0], box[2][0])
@@ -525,6 +524,8 @@ def draw_box():
     glVertex3f(box[0][0], box[1][1], box[2][1])
     glVertex3f(box[0][0], box[1][1], box[2][0])
     glEnd()
+    # 3 optimize
+    glEndList()
 
 
 def init_light():
@@ -537,6 +538,7 @@ def init_light():
     glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
     glEnable(GL_BLEND)
     glEnable(GL_LINE_SMOOTH)
+    # 6 optimize
     glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE)
     glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE)
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (0.5, 0.5, 0.5, 1))
@@ -560,6 +562,7 @@ def main():
     glfw.set_key_callback(window, moveevent)
 
     glClearColor(0.3, 0.3, 0.3, 1)
+    # 5 optimize
     glEnable(GL_DEPTH_TEST)
 
     glLoadIdentity()
@@ -595,10 +598,11 @@ def main():
         new_time = time.time()
         dt = new_time - cur_time
         cur_time = new_time
-        t_sum += dt
+        if t_count != 0:
+            t_sum += dt
         t_count += 1
-        if t_count == 10 or t_count % 1000 == 0:
-            print(t_sum / t_count)
+        if t_count == 101:  # without zero frame
+            print(t_sum / (t_count - 1))
 
     glfw.destroy_window(window)
     glfw.terminate()

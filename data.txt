@@ -1,0 +1,1 @@
+{"xpos": -0.11938683921960092, "ypos": 0.0, "zpos": 0.0, "vx": 0.8219363689422607, "vy": 0, "vz": 0, "oxtr": 0, "oytr": -3.8775815963745117, "oztr": 0, "world_xpos": 0, "world_ypos": 0, "world_zpos": 0, "world_oxtr": 0, "world_oytr": 0, "world_oztr": 0, "world_change": false, "move": true, "cutoff": 7.434449195861816, "exp": 0}
